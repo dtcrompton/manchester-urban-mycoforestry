@@ -2,6 +2,18 @@
 
 **Time-series analysis of fungal species richness and community composition at restored vs. unrestored brownfield sites using GBIF occurrence records**
 
+**⚠️ PROJECT STATUS: PAUSED**
+
+*This project was paused during Phase 2 (data collection) due to fundamental data quality limitations in GBIF occurrence records. 86% of fungal observations have coordinate uncertainty >1km, preventing reliable spatial matching to brownfield sites. The research question ("Which brownfield sites show fungal biodiversity recovery after restoration?") requires site-level precision that citizen science data cannot provide.*
+
+*Future work would require systematic plot survey data from councils or research institutions. The data exploration and cleaning scripts developed here remain useful for other GBIF-based projects.*
+
+---
+
+**Original Project Overview:**
+
+Time-series analysis of fungal species richness and community composition at restored vs. unrestored brownfield sites using GBIF occurrence records.
+
 ## Project Overview
 
 This project investigates whether — and how quickly — fungal biodiversity recovers after brownfield restoration interventions. Using GBIF (Global Biodiversity Information Facility) occurrence records from 2000-2025, I compare fungal species richness trajectories at restored brownfield sites, unrestored sites, and never-brownfield control locations in Leeds.
@@ -108,6 +120,47 @@ This project investigates whether — and how quickly — fungal biodiversity re
 **Month 6:**
 - Phase 4-5: Time-series analysis + spatial mapping
 - Phase 6: Portfolio write-up + stakeholder outputs
+
+## Why This Project Was Paused
+
+**Data quality analysis revealed:**
+- 86% of GBIF records have coordinate uncertainty >1km
+- Only 10.4% of records precise to <100m
+- Citizen science recording effort bias (COVID-2020 spike: 415 species vs. 254 in 2019)
+- Cannot reliably assign fungal observations to specific brownfield sites
+
+**Spatial precision required for research questions:**
+- "Which brownfield sites recovered fungal diversity?" → Needs <50m precision
+- "How long does recovery take?" → Needs known restoration dates + precise site matching
+
+**Lessons learned:**
+- GBIF data suitable for **citywide trends**, not **site-level analysis**
+- Citizen science data requires effort correction (rarefaction) for temporal comparisons
+- Restoration outcome studies need systematic surveys, not opportunistic observations
+
+**Potential future directions:**
+- Partner with councils for systematic plot survey data
+- Use high-precision subset (1,421 records <1km) for exploratory spatial analysis only
+- Reframe as citywide temporal study (accepting lower spatial resolution)
+
+## Data & Code
+
+**Completed phases:**
+- ✅ Phase 1: Site categorization (878 Leeds brownfield sites)
+- ✅ Phase 2: GBIF data collection (10,200 fungal records, 1,107 species)
+- ✅ Data cleaning pipeline (`python/gbif_clean.py`)
+- ✅ Data quality assessment
+
+**Available datasets:**
+- `data/raw/leeds_brownfield.csv` — 878 brownfield sites (filtered from UK register)
+- `data/gbif/leeds_fungi_raw.csv` — 10,200 GBIF fungal occurrence records
+- `data/processed/leeds_fungi_clean.csv` — 8,548 cleaned records (deduplicated)
+- `data/processed/annual_species_richness.csv` — Species richness 2009-2025
+
+**Code:**
+- `python/gbif_download.py` — GBIF API query script
+- `python/gbif_clean.py` — Data cleaning and deduplication
+- `gee/vegetation_change.js` — Hansen forest change analysis (in progress)
 
 ## License
 
